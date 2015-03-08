@@ -1,8 +1,3 @@
 ### Test Generation Result
-*Statements   : 100% ( 92/92 )
+![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult.png)
 
-*Branches     : 100% ( 16/16 )
-
-*Functions    : 100% ( 5/5 )
-
-*Lines        : 100% ( 91/91 )
