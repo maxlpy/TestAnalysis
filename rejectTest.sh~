@@ -1,0 +1,31 @@
+#!/bin/sh
+node_modules/.bin/istanbul cover test.js > testCoverage.txt
+>reulst.txt
+filename='testCoverage.txt'
+filename1='result.txt'
+sed -n '3,6p' "$filename">$filename1
+
+while read line
+do
+var="50"
+hundred="100"
+temp=$line
+echo $temp
+#t=${temp:15:2}
+t=$temp | cut -c15,3
+if [ "$t" == "$hundred" ];
+then
+	t="99."
+fi
+
+
+t1=${t:0:2}
+if [ "$t1" -gt "$var" ];
+then
+	echo ${temp:0:10} "Coverage is higher than " $var "%! Pass!"
+else 
+	echo ${temp:0:10} "Coverage is less than " $var "%."
+	echo "!!!Failed to commit!!! Please check the test.txt for references" 
+	exit 1
+fi
+done<$filename1

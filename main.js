@@ -126,51 +126,51 @@ function constraints(filePath)
             traverse(node, function(child)
             {
 
-                if( child.type === 'BinaryExpression' && child.operator == "<")
-                {
-                    if( child.left.type == 'Identifier' && params.indexOf( child.left.name ) > -1)
-                    {
-                        // get expression from original source code:
-                        //var expression = buf.substring(child.range[0], child.range[1]);
-                        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
-                        functionConstraints[funcName].constraints.push(
-                            {
-                                ident: child.left.name,
-                                value: rightHand
-                            });
-                    }
-                }
-                if( child.type === 'BinaryExpression' && child.operator == ">")
-                {
-                    if( child.left.type == 'MemberExpression'  &&  child.left.property.name=='length')
-                    {
-                        // get expression from original source code:
-                        //var expression = buf.substring(child.range[0], child.range[1]);
-                        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
-                        functionConstraints[funcName].constraints.push(
-                            {
-                                ident: child.left.object.name,
-                                value: rightHand
-                            });
-                    }
-                }
+                //if( child.type === 'BinaryExpression' && child.operator == "<")
+                //{
+                //    if( child.left.type == 'Identifier' && params.indexOf( child.left.name ) > -1)
+                //    {
+                //        // get expression from original source code:
+                //        //var expression = buf.substring(child.range[0], child.range[1]);
+                //        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
+                //        functionConstraints[funcName].constraints.push(
+                //            {
+                //                ident: child.left.name,
+                //                value: rightHand
+                //            });
+                //    }
+                //}
+                //if( child.type === 'BinaryExpression' && child.operator == ">")
+                //{
+                //    if( child.left.type == 'MemberExpression'  &&  child.left.property.name=='length')
+                //    {
+                //        // get expression from original source code:
+                //        //var expression = buf.substring(child.range[0], child.range[1]);
+                //        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
+                //        functionConstraints[funcName].constraints.push(
+                //            {
+                //                ident: child.left.object.name,
+                //                value: rightHand
+                //            });
+                //    }
+                //}
 
-                if( child.type === 'BinaryExpression' && child.operator == "==")
-                {
-                    if( child.left.type == 'Identifier' && params.indexOf( child.left.name ) > -1)
-                    {
-                        // get expression from original source code:
-                        //var expression = buf.substring(child.range[0], child.range[1]);
-                        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
-                        functionConstraints[funcName].constraints.push(
-                            {
-                                ident: child.left.name,
-                                value: rightHand
-                            }
-                        );
-                        // console.log(functionConstraints[funcName].constraints);
-                    }
-                }
+                //if( child.type === 'BinaryExpression' && child.operator == "==")
+                //{
+                //    if( child.left.type == 'Identifier' && params.indexOf( child.left.name ) > -1)
+                //    {
+                //        // get expression from original source code:
+                //        //var expression = buf.substring(child.range[0], child.range[1]);
+                //        var rightHand = buf.substring(child.right.range[0], child.right.range[1])
+                //        functionConstraints[funcName].constraints.push(
+                //            {
+                //                ident: child.left.name,
+                //                value: rightHand
+                //            }
+                //        );
+                //        // console.log(functionConstraints[funcName].constraints);
+                //    }
+                //}
 
                 if( child.type == "LogicalExpression" && child.operator=='||')
                 {
