@@ -1,10 +1,24 @@
 #!/bin/bash
+# Reject a commit if it fails a minimum testing criteria (e.g. less than 50% statement coverage)
+# Use static analysis tool on the source code.
+
 node_modules/.bin/istanbul cover test.js > testCoverage.txt
 >reulst.txt
 filename='testCoverage.txt'
 filename1='result.txt'
 sed -n '3,6p' "$filename">$filename1
 
+echo "=== Running static analysis tool JSHint on the soucre code."
+jshint subject.js | tee jshintResult.txt
+tmp="$(grep -o "semicolon" jshintResult.txt)"
+if [[ $tmp == *"semicolon"* ]]
+then
+	echo "====== There are bugs in the source code.!!!!!"
+	echo "############### JSHint Analysis Failed #################"
+        exit 1
+fi
+echo "############### JSHint Analysis Successful #################"
+echo "=== Reject a commit if if fails a minimum test criteria."
 while read line
 do
 var="50"
@@ -13,17 +27,18 @@ temp=$line
 temp1=${temp#*:}
 temp2=${temp1%%(*}
 temp3=${temp2:0:4}
-
-if [ "$temp3" == "$hundred" ]
+temp4=${temp3:0:3}
+if [ "$temp4" -eq "10" ]
 then
-	temp3="99"
-	echo $temp2
+	temp4="99"
 fi
-temp3=${temp2:0:3}
-if [ "$temp3" -gt "$var" ]
+if [ "$temp4" -gt "$var" ]
 then
-	echo "Test coverage is greater than 50%."
+        echo ${temp:0:14} "=== Test coverage is greater than 50%."
 else
-	echo "Test coverage is smaller than 50%."
+        echo ${temp:0:14} "=== Test coverage is smaller than 50%."
+	echo "#################### Commit Failed ####################"
+	exit 1
 fi
 done<$filename1
+echo "#################### Commit Successful ####################"
