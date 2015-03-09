@@ -1,0 +1,4 @@
+subject.js: line 8, col 15, Missing semicolon.
+subject.js: line 9, col 6, Unnecessary semicolon.
+
+2 errors

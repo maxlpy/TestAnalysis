@@ -92,13 +92,13 @@ function generateMockTest(num1, num2, funcName, args)
     var argArray = args.split(',');
 
     if(num1){
-        var number = parseInt(argArray[0]) - Math.random()*10;
+        var number = parseInt(argArray[0]) - Math.random()*100;
         argArray[0] = number.toString();
     }
 
     if(num2){
         if(argArray[1]=="undefined" ||argArray[1]=="null" ){
-            argArray[1]=Math.random()*10;
+            argArray[1]=Math.random()*100;
         }
     }
     testCase += "subject.{0}({1});\n".format(funcName, argArray);
