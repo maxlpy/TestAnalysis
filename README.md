@@ -30,18 +30,26 @@ We used the JSHint to analyze the sourse code `subject.js`. The more infomation 
 ### Extend JSHint with a new rule
 According to above analysis result of JSHint, we got 3 errors. JSHint comes with a default set of warnings but it was designed to be very configurable. There are three main ways to configure your copy of JSHint. 
 We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. In case of `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
-We can configure the rules in the JSHint configure file and implement a new analysis.
+Eg: `error1: subject.js: line 4, col 10, Use '===' to compare with 'null'.` We can ignore ignore this rule via changing the JSHint configure file with following steps.
+Configure the rules in the JSHint configure file and implement a new analysis.
     {
-    "eqnull": true
+         "eqnull": true
     }
 
 Run `jshint subject.js` again, we can get the following result
     subject.js: line 8, col 15, Missing semicolon.
     subject.js: line 9, col 6, Unnecessary semicolon.
-    2 errors
+    2 error
+
+###  Reject a commit if it fails a minimum testing criteria
+We used git pre-commit hook to reject a a commit if its minimum testing criteria is lower than 50%. You can do it by following steps:
+#### Create a pre-commit file in the directory of .git/hooks.
+    cd .git/hooks
+    mv pre-commit.sample pre-commit
+    chmod +x pre-commit
+Then, copy the content of rejectTest.sh into pre-commit, and run `git commit -m "Test pre-commit"`. You will get the following result.
+#### If all test coverage is greater than 50%.
+
+#### If one test coverage is lower than 50%.
 
 
-
-
-We can see that there are 3 erros
-which are found by JsHint. We can modify the options of the JsHint to omit certain errors found by JsHint. For example, we want to omit the first error which is using '==' to compare with 'null'. We can create a .jshintrc file and put the JsHint options into it. The list of the JsHint options can be found here. To omit the above the error,we can put the following into the file.
