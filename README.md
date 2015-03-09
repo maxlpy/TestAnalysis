@@ -1,5 +1,11 @@
 # MILESTONE: TEST+ANALYSIS
 
+Team Member:
+- Pengyu Li    (pli5@ncsu.edu)
+
+- Nikhil Katre (nkatre@ncsu.edu)
+
+
 ## Testing Component
 ### Run unit tests, measure coverage, and report the results
 Based on previous workshop and hw2, we use TestGeneration tools to generate test case(test.js) to cover javascript unit test. And then, adopt Istanbul which is a coverage tool to run test case and get test result report.
@@ -20,14 +26,15 @@ We used contraint to generate the test case and improve the coverage by 100%. We
 ## Analysis Component
 ### Use an existing static analysis tool JSHint to analyze the source code
 We used the JSHint to analyze the sourse code `subject.js`. The more infomation about JSHint can be found from [here](http://jshint.com/docs)
-#### Install JSHint
+
+Install JSHint
 
     npm install jshint -g
 
-#### Run JSHint on sourse code
+Run JSHint on sourse code
 
     jshint subject.js
-#### Get analysis result
+Get analysis result
 
     subject.js: line 4, col 10, Use '===' to compare with 'null'.
     subject.js: line 8, col 15, Missing semicolon.
@@ -35,32 +42,33 @@ We used the JSHint to analyze the sourse code `subject.js`. The more infomation 
     3 errors
 
 ### Extend JSHint with a new rule
-According to the above analysis result of JSHint, we got 3 errors. JSHint comes with a default set of warnings but it was designed to be very configurable. There are three [main ways](http://jshint.com/docs/) to configure your copy of JSHint. 
+According to the above analysis result of JSHint, we got 3 errors. JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint. 
 
 We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. In case of `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
 For example, `error1: subject.js: line 4, col 10, Use '===' to compare with 'null'.` We can ignore this rule via changing the JSHint configure file with following steps.
 
-#### Configure the rules in the JSHint configure file and implement a new analysis.
+Configure the rules in the JSHint configure file and implement a new analysis.
 
     {
          "eqnull": true
     }
 
-#### Run `jshint subject.js` again, we can get the following result
+Run `jshint subject.js` again, we can get the following result
 
     subject.js: line 8, col 15, Missing semicolon.
     subject.js: line 9, col 6, Unnecessary semicolon.
     2 error
 
-###  Reject a commit if it fails a minimum testing criteria
+### Reject a commit if it fails a minimum testing criteria
+
 We used git pre-commit hook to reject a a commit if its minimum testing criteria is lower than 50%. You can do it by following steps:
 
-#### Create a pre-commit file in the directory of .git/hooks.
+Create a pre-commit file in the directory of .git/hooks.
 
     cd .git/hooks
     mv pre-comit.sample pre-commit
     chmod +x pre-commit
-Then, copy the content of rejectTest.sh into pre-commit, and run `git commit -m "Test pre-commit"`. You will get the following result.
+Then, copy the content of rejectTest.sh into pre-commit file, and then run `git commit -m "Test pre-commit"`. You will get the following results.
 
 #### Failed JSHint Analysis
 
@@ -74,9 +82,7 @@ Then, copy the content of rejectTest.sh into pre-commit, and run `git commit -m 
     subject.js: line 9, col 6, Unnecessary semicolon.
     2 errors
     ====== There are bugs in the source code.!!!!!
-    ############### JSHint Analysis Failed ##################
-
-
+    ############### JSHint Analysis Failed #################
 
 #### Test coverage is lower than 50%
 
