@@ -1,4 +1,4 @@
-Statements   : 76.92% ( 10/13 )
-Branches     : 50% ( 3/6 )
+Statements   : 93.75% ( 15/16 )
+Branches     : 83.33% ( 5/6 )
 Functions    : 100% ( 1/1 )
-Lines        : 83.33% ( 10/12 )
+Lines        : 93.33% ( 14/15 )

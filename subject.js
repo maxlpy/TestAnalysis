@@ -3,10 +3,10 @@ var fs = require("fs");
 function getPositve(p, q){
     if(q ==null) q =1;
 
-    if( p < -100000 )
+    if( p < 0 )
     {
-        p = -p
-    };
+        p = -p;
+    }
 
     if( p > 100) {
         p = p - 100;
