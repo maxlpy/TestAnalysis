@@ -28,12 +28,18 @@ Run istanbul tool to get a simple coverage report
 
     node_modules/.bin/istanbul cover test.js
     
-![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult0.png)
+    =============================== Coverage summary ===============================
+    Statements   : 93.75% ( 15/16 )
+    Branches     : 66.67% ( 4/6 )
+    Functions    : 100% ( 1/1 )
+    Lines        : 93.33% ( 14/15 )
+    ================================================================================
 
 ### Improve testing coverage with constraint
 We used contraint to generate the test case and improve the coverage by 100%. You can see `main.js` in my repository which include all the code to improve testing coverage. 
 
 We can run `node main.js` to generate `test.js` for `subject.js`. Then, we run istanbul tool to get the following coverage report.
+
 ![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult.png)
 
 ## Analysis Component
