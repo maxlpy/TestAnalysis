@@ -18,7 +18,7 @@ Extended Analysis - 10%
 Gate - 20%
 
 ### Unit Tests and Coverage results
-Based on previous workshop and hw2, we use TestGeneration tools to generate test case(test.js) to cover javascript unit test. And then, adopt Istanbul which is a coverage tool to run test case and get test result report.
+Based on previous workshop and hw2, we have used TestGeneration tools to generate test case(test.js) to cover javascript unit test. And then, adopt Istanbul which is a coverage tool to run test cases and report test result.
 
 Generate Unit Test Case: 
 
@@ -33,7 +33,7 @@ Run istanbul tool to get a simple coverage report
 ### Improve testing coverage with constraint
 We used contraint to generate the test case and improve the coverage by 100%. You can see `main.js` in my repository which include all the code to improve testing coverage. 
 
-We can run `node main.js` to generate `test.js` for `subject.js`. Then, we use istanbul tool to get the above coverage report.
+We can run `node main.js` to generate `test.js` for `subject.js`. Then, we run istanbul tool to get the above coverage report.
 
 ## Analysis Component
 ### Basic analysis using an existing static analysis tool JSHint to analyze the source code
@@ -46,17 +46,22 @@ Install JSHint
 Run JSHint on sourse code
 
     jshint subject.js
-Get analysis result
+Analysis results
 
     subject.js: line 4, col 10, Use '===' to compare with 'null'.
     subject.js: line 8, col 15, Missing semicolon.
     subject.js: line 9, col 6, Unnecessary semicolon.
-    3 errors
+    <b>3 errors</b>
 
 ### Extended Analysis using JSHint with a new rule 
-According to the above analysis result of JSHint, we got 3 errors. JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint. 
+According to the above analysis result of JSHint, we got `3 errors`. JSHint comes with a default set of warnings but it was designed to be very configurable. 
 
-We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. In case of `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
+#### JSHint Configuration
+
+JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint: you can either specify the configuration file manually via the --config flag, use a special file `.jshintrc` or put your config into your projects package.json file under the jshintConfig property. In case of .jshintrc, JSHint will start looking for this file in the same directory as the file that's being linted. If not found, it will move one level up the directory tree all the way up to the filesystem root. 
+
+We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. Due to `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
+
 For example, `error1: subject.js: line 4, col 10, Use '===' to compare with 'null'.` We can ignore this rule via changing the JSHint configure file with following steps.
 
 Configure the rules in the JSHint configure file and implement a new analysis.
