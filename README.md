@@ -5,9 +5,19 @@ Team Member:
 
 - Nikhil Katre (nkatre@ncsu.edu)
 
+## Evaluation
 
-## Testing Component
-### Run unit tests, measure coverage, and report the results
+Unit Tests and Coverage - 20%
+
+Test Generation/Exploration Technique - 20%
+
+Base Analysis - 30%
+
+Extended Analysis - 10%
+
+Gate - 20%
+
+### Unit Tests and Coverage results
 Based on previous workshop and hw2, we use TestGeneration tools to generate test case(test.js) to cover javascript unit test. And then, adopt Istanbul which is a coverage tool to run test case and get test result report.
 
 Generate Unit Test Case: 
@@ -21,10 +31,12 @@ Run istanbul tool to get a simple coverage report
 ![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult.png)
 
 ### Improve testing coverage with constraint
-We used contraint to generate the test case and improve the coverage by 100%. We run `node main.js` to generate `test.js`, and the code under test is `subject.js`. After all, we get the above coverage report.
+We used contraint to generate the test case and improve the coverage by 100%. You can see `main.js` in my repository which include all the code to improve testing coverage. 
+
+We can run `node main.js` to generate `test.js` for `subject.js`. Then, we use istanbul tool to get the above coverage report.
 
 ## Analysis Component
-### Use an existing static analysis tool JSHint to analyze the source code
+### Basic analysis using an existing static analysis tool JSHint to analyze the source code
 We used the JSHint to analyze the sourse code `subject.js`. The more infomation about JSHint can be found from [here](http://jshint.com/docs)
 
 Install JSHint
@@ -41,7 +53,7 @@ Get analysis result
     subject.js: line 9, col 6, Unnecessary semicolon.
     3 errors
 
-### Extend JSHint with a new rule
+### Extended Analysis using JSHint with a new rule 
 According to the above analysis result of JSHint, we got 3 errors. JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint. 
 
 We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. In case of `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
@@ -59,7 +71,7 @@ Run `jshint subject.js` again, we can get the following result
     subject.js: line 9, col 6, Unnecessary semicolon.
     2 error
 
-### Reject a commit if it fails a minimum testing criteria
+### Reject a commit using Gate value 50%.
 
 We used git pre-commit hook to reject a a commit if its minimum testing criteria is lower than 50%. You can do it by following steps:
 
