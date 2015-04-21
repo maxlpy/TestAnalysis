@@ -28,12 +28,13 @@ Run istanbul tool to get a simple coverage report
 
     node_modules/.bin/istanbul cover test.js
     
-![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult.png)
+![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult0.png)
 
 ### Improve testing coverage with constraint
 We used contraint to generate the test case and improve the coverage by 100%. You can see `main.js` in my repository which include all the code to improve testing coverage. 
 
-We can run `node main.js` to generate `test.js` for `subject.js`. Then, we run istanbul tool to get the above coverage report.
+We can run `node main.js` to generate `test.js` for `subject.js`. Then, we run istanbul tool to get the following coverage report.
+![alt tag](https://github.com/maxlpy/TestAnalysis/blob/master/pictures/TestResult1.png)
 
 ## Analysis Component
 ### Basic analysis using an existing static analysis tool JSHint to analyze the source code
@@ -58,9 +59,11 @@ According to the above analysis result of JSHint, we got `3 errors`. JSHint come
 
 #### JSHint Configuration
 
-JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint: you can either specify the configuration file manually via the --config flag, use a special file `.jshintrc` or put your config into your projects package.json file under the jshintConfig property. In case of .jshintrc, JSHint will start looking for this file in the same directory as the file that's being linted. If not found, it will move one level up the directory tree all the way up to the filesystem root. 
+JSHint comes with a default set of warnings but it was designed to be very configurable. There are [three ways](http://jshint.com/docs/) to configure your copy of JSHint: you can either specify the configuration file manually via the --config flag, use a special file `.jshintrc` or put your config into your projects package.json file under the jshintConfig property. 
 
-We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. Due to `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. 
+In case of `.jshintrc`, JSHint will start looking for this file in the same directory as the file that's being linted. If not found, it will move one level up the directory tree all the way up to the filesystem root. 
+
+We used the second methd to create a special file `.jshintrc` and put this config into the directory of our project. 
 
 For example, `error1: subject.js: line 4, col 10, Use '===' to compare with 'null'.` We can ignore this rule via changing the JSHint configure file with following steps.
 
@@ -85,9 +88,10 @@ Create a pre-commit file in the directory of .git/hooks.
     cd .git/hooks
     mv pre-comit.sample pre-commit
     chmod +x pre-commit
+    
 Then, copy the content of rejectTest.sh into pre-commit file, and then run `git commit -m "Test pre-commit"`. You will get the following results.
 
-#### Failed JSHint Analysis
+#### JSHint Analysis Results
 
     fred@acer:~/Dropbox/Courses/CSC591/TestAnalysis$ git commit -m "test"
     =============================================================================
@@ -101,7 +105,19 @@ Then, copy the content of rejectTest.sh into pre-commit file, and then run `git 
     ====== There are bugs in the source code.!!!!!
     ############### JSHint Analysis Failed #################
 
-#### Test coverage is lower than 50%
+After fixing the above two errors, we can run `git commit -m test2` again. The successful analysis results came out.
+
+    fred@acer:~/Dropbox/Courses/CSC591/TestAnalysis$ git commit -m "test2"
+    =============================================================================
+    Writing coverage object [/home/fred/Dropbox/Courses/CSC591/TestAnalysis/coverage/coverage.json]
+    Writing coverage reports at [/home/fred/Dropbox/Courses/CSC591/TestAnalysis/coverage]
+    =============================================================================
+    === Running static analysis tool JSHint on the soucre code.
+    ############### JSHint Analysis Successful #################
+
+#### Test coverage is lower than gate value 50%
+
+When test criteria is lower than 50%, the gate value of 50% will tell the test results and fail the `git commit`. We will get the following test results:
 
     fred@acer:~/Dropbox/Courses/CSC591/TestAnalysis$ git commit -m "add reject a commit function"
     =============================================================================
@@ -115,7 +131,9 @@ Then, copy the content of rejectTest.sh into pre-commit file, and then run `git 
     Branches   : === Test coverage is smaller than 50%.   
     ###################### Commit Failed ######################
     
-#### All successful Result
+If we added more test cases and all test criterias greater than 50%, `git commit` will succeed. In this case, we run `git commit -m "test"` again, it will show the following test results.
+    
+#### Test coverage is greater than gate value 50%
 
     fred@acer:~/Dropbox/Courses/CSC591/TestAnalysis$ git commit -m "test"
     =============================================================================
